@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+    release: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: customer-service
+          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.containerPorts.http }}
+          env:
+          - name: SPRING_DATASOURCE_URL
+            value: {{.Values.env.SPRING_DATASOURCE_URL}}
+            #value: jdbc:postgresql://127.0.0.1:5432/customer
+
+          - name: SPRING_DATASOURCE_USERNAME
+            value: postgres
+            #valueFrom:
+             #secretKeyRef:
+              #name: {{.Values.env.SPRING_DATASOURCE_USERNAME}}
+              #key: username
+
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+             secretKeyRef:
+              name: {{.Values.postgresql.auth.existingSecret}}
+              key: postgres-password
+          
+          resources:
+           limits:
+            cpu: 500m
+            memory: 2Gi
+           requests:
+            cpu: 100m
+            memory: 256Mi

@@ -1,0 +1,55 @@
+## @param replicaCount Number of Nginx replicas to deploy
+replicaCount: 3
+
+## Settings for customer-service image
+##
+## @param image.name customer-service image name to use
+## @param image.tag customer-service image tag to use
+image:
+  name: mjuharia76/mmv3-customer-service
+  tag: '1.0.11-SNAPSHOT'
+
+## customer-service container ports
+##
+## @param containerPorts.http
+containerPorts:
+  http: 7100
+
+## Settings for NGINX service
+##
+## @param service.enabled Whether to deploy the service altogether or not
+## @param service.type The type of service in front of the customer-service pods
+## @param service.port The port where the service is receiving requests
+service:
+  enabled: true
+  type: LoadBalancer
+  port: 7100
+
+env:
+  SPRING_DATASOURCE_URL: jdbc:postgresql://cust-svc-postgresql:5432/postgres
+
+
+postgresql:
+  auth:
+    username: postgres         # your app user
+    existingSecret: cust-svc-postgresql-secret
+    database: customer           # default DB
+   
+  primary:
+    persistence:
+      enabled: true
+      size: 10Gi
+      storageClass: ""             # for minikube, often leave empty
+                                 # or set to your storageClass name
+
+    service:
+      type: ClusterIP                # use NodePort or LoadBalancer if you really need external
+      port: 5432
+  
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi

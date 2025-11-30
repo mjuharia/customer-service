@@ -1,0 +1,10 @@
+apiVersion: v2
+name: customer-service
+description: A Helm chart for deploying customer service to Kubernetes
+type: application
+version: 0.1.1
+appVersion: 1.0.11
+dependencies:
+ - name: "postgresql"
+   version: "18.1.12"
+   repository: "https://charts.bitnami.com/bitnami"
