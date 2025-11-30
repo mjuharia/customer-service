@@ -151,5 +151,5 @@ jobs:
       # 12. Check rollout
       - name: Check rollout status
         run: |
-          kubectl rollout status deployment/${{ env.APP_NAME }} -n "${{ env.HELM_NAMESPACE }}" || \
+          kubectl rollout status deployment/${{ env.HELM_RELEASE_NAME }} -n "${{ env.HELM_NAMESPACE }}" || \
           (kubectl get pods -n "${{ env.HELM_NAMESPACE }}" && exit 1)
