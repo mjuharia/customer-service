@@ -40,7 +40,7 @@ on:
   workflow_dispatch: {}
 
 env:
-  APP_NAME: customer-service                 # Kubernetes Deployment name
+  APP_NAME: cust-svc                 		 # Kubernetes Deployment name
   HELM_CHART_DIR: helm/customer-service      # your chart path
   HELM_RELEASE_NAME: customer-service        # Helm release name
   HELM_NAMESPACE: cust                       # namespace in GKE
