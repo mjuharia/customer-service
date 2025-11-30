@@ -39,13 +39,13 @@ on:
       - '"main"'
 
 env:
-  PROJECT_ID: 'my-project' # TODO: update to your Google Cloud project ID
-  GAR_LOCATION: 'us-central1' # TODO: update to your region
-  GKE_CLUSTER: 'cluster-1' # TODO: update to your cluster name
-  GKE_ZONE: 'us-central1-c' # TODO: update to your cluster zone
-  DEPLOYMENT_NAME: 'gke-test' # TODO: update to your deployment name
-  REPOSITORY: 'samples' # TODO: update to your Artifact Registry docker repository name
-  IMAGE: 'static-site'
+  PROJECT_ID: 'customer-service' # TODO: update to your Google Cloud project ID
+  GAR_LOCATION: 'us-east' # TODO: update to your region
+  GKE_CLUSTER: 'moso-cluster' # TODO: update to your cluster name
+  GKE_ZONE: 'us-east5' # TODO: update to your cluster zone
+  DEPLOYMENT_NAME: 'customer-service' # TODO: update to your deployment name
+  REPOSITORY: 'mjuharia76/mmv3-customer-service' # TODO: update to your Artifact Registry docker repository name
+  IMAGE: '1.0.11-SNAPSHOT'
   WORKLOAD_IDENTITY_PROVIDER: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider' # TODO: update to your workload identity provider
 
 jobs:

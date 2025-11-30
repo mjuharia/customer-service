@@ -1,4 +1,4 @@
-## @param replicaCount Number of Nginx replicas to deploy
+## @param replicaCount Number of customer-service replicas to deploy
 replicaCount: 3
 
 ## Settings for customer-service image
