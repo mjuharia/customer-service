@@ -94,7 +94,8 @@ jobs:
         id: build-image
         run: |
           IMAGE_REPO="docker.io/mjuharia76/mmv3-customer-service"
-          IMAGE_TAG="${GITHUB_SHA::7}"
+          #IMAGE_TAG="${GITHUB_SHA::7}"
+          IMAGE_TAG="1.0.11-SNAPSHOT"
           IMAGE_NAME="${IMAGE_REPO}:${IMAGE_TAG}"
 
           echo "Building image with Maven: ${IMAGE_NAME}"
