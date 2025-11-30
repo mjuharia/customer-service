@@ -119,24 +119,33 @@ jobs:
       # 8. Install Helm
       - name: Install Helm
         uses: azure/setup-helm@v4
+        
+      # 9. Fetch chart dependencies
+	  - name: Helm dependency build
+	    run: |
+    	  helm repo add bitnami https://charts.bitnami.com/bitnami
+    	  helm repo update
+    	  helm dependency build "${{ env.HELM_CHART_DIR }}"
 
-      # 9. Ensure namespace exists
+      # 10. Ensure namespace exists
       - name: Ensure namespace exists
         run: |
           kubectl get ns "${{ env.HELM_NAMESPACE }}" || kubectl create ns "${{ env.HELM_NAMESPACE }}"
 
-      # 10. Helm upgrade/install using the new image
+      # 11. Helm upgrade/install using the new image
+      
       - name: Deploy with Helm
         run: |
           IMAGE_REPO="${{ steps.build-image.outputs.image_repo }}"
           IMAGE_TAG="${{ steps.build-image.outputs.image_tag }}"
-
+          
+          		
           helm upgrade --install "${{ env.HELM_RELEASE_NAME }}" "${{ env.HELM_CHART_DIR }}" \
             --namespace "${{ env.HELM_NAMESPACE }}" \
             --set image.repository="${IMAGE_REPO}" \
             --set image.tag="${IMAGE_TAG}"
 
-      # 11. Check rollout
+      # 12. Check rollout
       - name: Check rollout status
         run: |
           kubectl rollout status deployment/${{ env.APP_NAME }} -n "${{ env.HELM_NAMESPACE }}" || \
