@@ -95,7 +95,9 @@ jobs:
         run: |
           IMAGE_REPO="docker.io/mjuharia76/mmv3-customer-service"
           #IMAGE_TAG="${GITHUB_SHA::7}"
-          IMAGE_TAG="1.0.11-SNAPSHOT"
+          # Retrieving project verions aka image tag from pom.xml
+          IMAGE_TAG=$(mvn -q -DforceStdout help:evaluate -Dexpression=project.version)
+          #IMAGE_TAG="1.0.11-SNAPSHOT"
           IMAGE_NAME="${IMAGE_REPO}:${IMAGE_TAG}"
 
           echo "Building image with Maven: ${IMAGE_NAME}"
@@ -113,8 +115,8 @@ jobs:
           IMAGE_TAG="${{ steps.build-image.outputs.image_tag }}"
 
           docker push "${IMAGE_REPO}:${IMAGE_TAG}"
-          docker tag "${IMAGE_REPO}:${IMAGE_TAG}" "${IMAGE_REPO}:1.0.11-SNAPSHOT"
-          docker push "${IMAGE_REPO}:1.0.11-SNAPSHOT"
+          docker tag "${IMAGE_REPO}:${IMAGE_TAG}" "${IMAGE_REPO}:${IMAGE_TAG}"
+          docker push "${IMAGE_REPO}:${IMAGE_TAG}"
 
      
 
