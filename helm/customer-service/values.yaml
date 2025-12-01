@@ -7,7 +7,8 @@ replicaCount: 3
 ## @param image.tag customer-service image tag to use
 image:
   name: mjuharia76/mmv3-customer-service
-  tag: '1.0.11-SNAPSHOT'
+  tag: 'latest'
+  #tag: '1.0.11-SNAPSHOT'
 
 ## customer-service container ports
 ##
@@ -43,7 +44,7 @@ postgresql:
                                  # or set to your storageClass name
 
     service:
-      type: ClusterIP                # use NodePort or LoadBalancer if you really need external
+      type: LoadBalancer                # use NodePort or LoadBalancer if you really need external
       port: 5432
   
   resources:

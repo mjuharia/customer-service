@@ -2,6 +2,20 @@
 # Registry, and deploy it to GKE when there is a push to the "main"
 # branch.
 #
+
+#Create these secrets in Google cloud under Settings → Secrets and variables → Actions:
+
+#GCP_PROJECT_ID → your GCP project ID
+
+#GKE_CLUSTER_NAME → your GKE cluster name (e.g. cust-cluster)
+
+#GCP_SA_KEY → full JSON from your GCP service account (with GKE + read access)
+
+#DOCKERHUB_USERNAME → your Docker Hub username (mjuharia76)
+
+#DOCKERHUB_TOKEN → a Docker Hub access token or password
+
+
 # To configure this workflow:
 #
 # 1. Enable the following Google Cloud APIs:
