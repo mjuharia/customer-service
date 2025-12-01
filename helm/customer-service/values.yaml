@@ -35,6 +35,9 @@ postgresql:
     username: postgres         # your app user
     existingSecret: cust-svc-postgresql-secret
     database: customer           # default DB
+  
+  readReplicas:
+    replicaCount: 1
    
   primary:
     persistence:
