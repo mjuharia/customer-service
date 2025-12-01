@@ -58,7 +58,7 @@ env:
   HELM_CHART_DIR: helm/customer-service      # your chart path
   HELM_RELEASE_NAME: cust-svc        		 # Helm release name
   HELM_NAMESPACE: cust                       # namespace in GKE
-  GKE_LOCATION: us-east5                     # your GKE region
+  GKE_LOCATION: us-central1                  # your GKE region
 
 jobs:
   build-and-deploy:
