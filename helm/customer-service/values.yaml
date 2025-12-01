@@ -37,8 +37,8 @@ postgresql:
     existingSecret: cust-svc-postgresql-secret
     database: customer           # default DB
   
-  readReplicas:
-    replicaCount: 1
+  #readReplicas:
+  #  replicaCount: 1
    
   primary:
     persistence:
@@ -48,7 +48,7 @@ postgresql:
                                  # or set to your storageClass name
 
     service:
-      type: LoadBalancer                # use NodePort or LoadBalancer if you really need external
+      type: ClusterIP                # use NodePort, ClusterIP or LoadBalancer if you really need external
       port: 5432
   
   resources:
