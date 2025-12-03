@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJacksonValue;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+
 import com.moso.microservice.customerservice.enity.Customer;
 import com.moso.microservice.customerservice.enity.CustomerContact;
 import com.moso.microservice.customerservice.enity.DrawDocs;
@@ -79,7 +77,7 @@ public class DrawController {
 		
 		return lEntDraw;
 	}
-	
+	/*
 	@GetMapping("/draws/{id}")
 	public MappingJacksonValue fetchDrawFiltered(@PathVariable int id){
 		
@@ -95,10 +93,10 @@ public class DrawController {
 		
 		WebMvcLinkBuilder link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllDraws());
 		lEntUsr.add(link.withRel("all-draws"));
-		*/
+		
 		return mapJackVal;
 	}
-	
+	*/
 	
 	@PostMapping("/draw")
 	public ResponseEntity<DrawRequest> createDrawRequest(@Valid @RequestBody DrawRequest drawReq){
@@ -155,6 +153,8 @@ public class DrawController {
 	
 	/******************          DRAW RESPONSE SECTION  ********************/
 	
+	
+	/*
 	@GetMapping("/drawresponses/{id}")
 	public MappingJacksonValue fetchDrawResponsesFiltered(@PathVariable int id){
 		DrawResponse lDrawResp = getDrawResponseByID(id);
@@ -171,15 +171,16 @@ public class DrawController {
 		
 		MappingJacksonValue mapJackVal = new MappingJacksonValue(lDrawResp);
 		mapJackVal.setFilters(filters);
-		/*
+		
 		EntityModel<MappingJacksonValue> lEntDraw = EntityModel.of(mapJackVal);
 		
 		WebMvcLinkBuilder link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllDraws());
 		lEntUsr.add(link.withRel("all-draws"));
-		*/
+		
 		return mapJackVal;
 	}
-	
+	*/
+
 	@PostMapping("/drawresponse")
 	public ResponseEntity<DrawResponse> createDrawResponse(@Valid @RequestBody DrawResponse drawResp){
 		
@@ -264,7 +265,7 @@ public class DrawController {
 	
 	
 	
-	
+	/*
 	@GetMapping("/drawdocs-filtered/{id}")
 	public MappingJacksonValue fetchDrawDocFiltered(@PathVariable int id){
 		Optional<DrawDocs> lOptDrawDocResp = lDrawDocRepo.findById(id);
@@ -284,10 +285,10 @@ public class DrawController {
 		
 		WebMvcLinkBuilder link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllDraws());
 		lEntUsr.add(link.withRel("all-draws"));
-		*/
+		
 		return mapJackVal;
 	}
-	
+	*/
 	@GetMapping("/draws")
 	public List<DrawRequest> getAllDraws(){
 		return lDrawReqRepo.findAll();
